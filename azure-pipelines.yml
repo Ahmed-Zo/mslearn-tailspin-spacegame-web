@@ -51,15 +51,9 @@ steps:
     arguments: '--no-build --configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/$(buildConfiguration)'
     zipAfterPublish: true
 
-- template: build.yml
-  parameters:
-    buildConfiguration: 'Debug'
-
-- template: build.yml
-  parameters:
-    buildConfiguration: 'Release'
+- task: WhiteSource Bolt@19
+  displayName: 'Run WhiteSource Bolt'
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: drop'
   condition: succeeded()
-  
